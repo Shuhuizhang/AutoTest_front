@@ -15,7 +15,7 @@
         </el-form-item>
         <el-form-item  prop="password">
           <el-input
-            prefix-icon="el-icon-s-goods"
+            prefix-icon="el-icon-lock"
             placeholder="请输入密码"
             v-model="loginForm.password"
             type="password"

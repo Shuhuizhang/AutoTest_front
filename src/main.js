@@ -6,8 +6,20 @@ import './plugins/element.js'
 import './assets/css/global.css'
 
 import axios from 'axios'
-Vue.prototype.$http = axios
+axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://127.0.0.1:5000/api/'
+axios.interceptors.response.use(
+  response => {
+    if (response.data.code === 403) {
+      router.push({
+        path: '/login'
+      })
+    }
+    return response
+  })
+
+Vue.prototype.$http = axios
+
 Vue.config.productionTip = false
 
 new Vue({
