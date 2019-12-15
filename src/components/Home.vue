@@ -11,32 +11,30 @@
     <el-container>
       <!--左边栏-->
       <el-aside width="200px">
-        <el-menu
+        <el-menu  :default-active="activePath"
           background-color="#333744"
           text-color="#fff"
           active-text-color="#409fff"
           unique-opened
-          router
-          default-active="/cases"
-        >
+          router>
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-s-management"></i>
               <span>测试管理</span>
             </template>
-            <el-menu-item index="/cases">
+            <el-menu-item index="/cases" @click="saveNavStatus('/cases')">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>测试用例</span>
               </template>
             </el-menu-item>
-            <el-menu-item index="/plan">
+            <el-menu-item index="/plan" @click="saveNavStatus('/plan')">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>测试任务</span>
               </template>
             </el-menu-item>
-            <el-menu-item index="/report">
+            <el-menu-item index="/report" @click="saveNavStatus('/report')">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>测试报告</span>
@@ -48,7 +46,7 @@
               <i class="el-icon-user"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="/user">
+            <el-menu-item index="/user" @click="saveNavStatus('/user')">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>用户列表</span>
@@ -67,8 +65,14 @@
 
 <script>
 export default {
+  data () {
+    return {
+      activePath: ''
+    }
+  },
   created () {
     this.getIndex()
+    this.activePath = window.sessionStorage.getItem('activepath')
   },
   methods: {
     async getIndex () {
@@ -78,6 +82,10 @@ export default {
     logout () {
       this.$http.get('/logout')
       window.sessionStorage.clear()
+    },
+    saveNavStatus (activePath) {
+      window.sessionStorage.setItem('activepath', activePath)
+      this.activePath = activePath
     }
   }
 }

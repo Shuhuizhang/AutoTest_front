@@ -4,6 +4,7 @@ import Login from '../components/Login'
 import Home from '../components/Home'
 import Case from '../components/Case'
 import User from '../components/User'
+import TestTask from '../components/TestTask'
 
 Vue.use(VueRouter)
 
@@ -15,7 +16,8 @@ const routes = [
     component: Home,
     children: [
       { path: '/cases', component: Case },
-      { path: '/user', component: User }
+      { path: '/user', component: User },
+      { path: '/plan', component: TestTask }
     ]
   }
 ]
